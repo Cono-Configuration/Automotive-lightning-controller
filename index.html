@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive Lighting Controller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Automotive Lighting Controller</h1>
+            <p>Digital Electronics Simulation</p>
+        </header>
+
+        <main>
+            <div class="row">
+                <!-- Vehicle Visualization -->
+                <section class="panel vehicle-panel">
+                    <h2>Vehicle Visualization</h2>
+                    <div class="car">
+                        <div class="car-front">FRONT</div>
+                        <div class="lights-row">
+                            <div class="light-group">
+                                <div class="led led-white" id="led-hl-l"></div>
+                                <span>HL</span>
+                            </div>
+                            <div class="light-group">
+                                <div class="led led-white" id="led-hl-r"></div>
+                                <span>HR</span>
+                            </div>
+                        </div>
+                        <div class="car-body">CAR</div>
+                        <div class="lights-row">
+                            <div class="light-group">
+                                <div class="led led-amber" id="led-ind-l"></div>
+                                <span>IL</span>
+                            </div>
+                            <div class="light-group">
+                                <div class="led led-amber" id="led-ind-r"></div>
+                                <span>IR</span>
+                            </div>
+                        </div>
+                        <div class="lights-row">
+                            <div class="light-group">
+                                <div class="led led-red" id="led-br-l"></div>
+                                <span>BL</span>
+                            </div>
+                            <div class="light-group">
+                                <div class="led led-red" id="led-br-r"></div>
+                                <span>BR</span>
+                            </div>
+                        </div>
+                        <div class="car-rear">REAR</div>
+                    </div>
+                </section>
+
+                <!-- Control Panel -->
+                <section class="panel control-panel">
+                    <h2>Control Panel</h2>
+                    <div class="controls">
+                        <label class="switch-container">
+                            <input type="checkbox" id="sw-headlight">
+                            <span class="switch-label">Headlight</span>
+                            <span class="status-badge" id="st-headlight">OFF</span>
+                        </label>
+                        <label class="switch-container">
+                            <input type="checkbox" id="sw-left">
+                            <span class="switch-label">Left Indicator</span>
+                            <span class="status-badge" id="st-left">OFF</span>
+                        </label>
+                        <label class="switch-container">
+                            <input type="checkbox" id="sw-right">
+                            <span class="switch-label">Right Indicator</span>
+                            <span class="status-badge" id="st-right">OFF</span>
+                        </label>
+                        <label class="switch-container">
+                            <input type="checkbox" id="sw-hazard">
+                            <span class="switch-label">Hazard</span>
+                            <span class="status-badge" id="st-hazard">OFF</span>
+                        </label>
+                        <label class="switch-container">
+                            <input type="checkbox" id="sw-brake">
+                            <span class="switch-label">Brake</span>
+                            <span class="status-badge" id="st-brake">OFF</span>
+                        </label>
+                    </div>
+                    <div class="actions">
+                        <button id="btn-reset">Reset Simulation</button>
+                        <button id="btn-demo">Auto Demo</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="row">
+                <!-- System Status -->
+                <section class="panel status-panel">
+                    <h2>System Status</h2>
+                    <ul class="status-list">
+                        <li><strong>Clock:</strong> <span id="sys-clock" class="clock-indicator"></span></li>
+                        <li><strong>Headlights:</strong> <span id="sys-hl">OFF</span></li>
+                        <li><strong>Left Indicator:</strong> <span id="sys-il">OFF</span></li>
+                        <li><strong>Right Indicator:</strong> <span id="sys-ir">OFF</span></li>
+                        <li><strong>Hazard:</strong> <span id="sys-haz">OFF</span></li>
+                        <li><strong>Brake Lights:</strong> <span id="sys-br">OFF</span></li>
+                    </ul>
+                    <div class="explanation-box" id="sys-explanation">
+                        System is idle.
+                    </div>
+                </section>
+
+                <!-- Timing Diagram -->
+                <section class="panel timing-panel">
+                    <h2>Timing Diagram</h2>
+                    <div class="timing-tracks" id="timing-diagram">
+                        <div class="track">
+                            <span class="track-label">CLK</span>
+                            <div class="waveform" id="wave-clk"></div>
+                        </div>
+                        <div class="track">
+                            <span class="track-label">L_IND</span>
+                            <div class="waveform" id="wave-lind"></div>
+                        </div>
+                        <div class="track">
+                            <span class="track-label">R_IND</span>
+                            <div class="waveform" id="wave-rind"></div>
+                        </div>
+                        <div class="track">
+                            <span class="track-label">HAZ</span>
+                            <div class="waveform" id="wave-haz"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Digital Logic / Circuit Diagram -->
+            <section class="panel circuit-panel">
+                <h2>Digital Logic / Circuit Diagram</h2>
+                <div class="circuit-diagram">
+                    <div class="circuit-block">INPUT SWITCHES<br><small>(Headlight, Indicators, Hazard, Brake)</small></div>
+                    <div class="arrow">↓</div>
+                    <div class="circuit-block logic-gates">
+                        LOGIC GATES<br>
+                        <small>
+                            L_OUT = (L_IND OR HAZARD) AND CLOCK<br>
+                            R_OUT = (R_IND OR HAZARD) AND CLOCK
+                        </small>
+                    </div>
+                    <div class="clock-input">
+                        <div class="circuit-block clock-block">CLOCK / TIMER<br><small>(1 Hz Square Wave)</small></div>
+                        <div class="arrow-right">→</div>
+                    </div>
+                    <div class="arrow">↓</div>
+                    <div class="circuit-block">OUTPUT LEDs<br><small>(L_LED, R_LED)</small></div>
+                </div>
+            </section>
+
+            <!-- Road Safety Section -->
+            <section class="panel safety-panel">
+                <h2>Road Safety & SDGs</h2>
+                <div class="safety-content">
+                    <p>This digital controller improves road safety by providing predictable, synchronized lighting:</p>
+                    <ul>
+                        <li><strong>Indicators</strong> communicate driver intentions to turn.</li>
+                        <li><strong>Brake lights</strong> immediately warn vehicles behind.</li>
+                        <li><strong>Hazard lights</strong> provide synchronized warning signals (overriding individual indicators).</li>
+                        <li><strong>Automatic blinking</strong> ensures consistent timing using a digital clock.</li>
+                    </ul>
+                    <p><strong>Aligns with:</strong> SDG 3 (Good Health & Well-being - reducing accidents) and SDG 9 (Industry, Innovation & Infrastructure).</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

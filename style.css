@@ -1,0 +1,314 @@
+:root {
+    --bg-color: #ffffff;
+    --panel-bg: #f4f9ff;
+    --text-color: #002244;
+    --accent: #0055cc;
+    --led-off: #d0d0d0;
+    --led-white-on: #ffffff;
+    --led-amber-on: #ffaa00;
+    --led-red-on: #ff0000;
+    --border-color: #cce0ff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace; /* Digital electronics vibe */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+}
+
+h1, h2 {
+    color: var(--accent);
+    margin-top: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.panel {
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Vehicle Visualization */
+.car {
+    width: 200px;
+    margin: 0 auto;
+    border: 2px dashed #99c2ff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+}
+
+.car-front, .car-rear {
+    font-size: 0.8em;
+    color: #0055cc;
+    margin: 10px 0;
+}
+
+.car-body {
+    margin: 30px 0;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.lights-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.light-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8em;
+}
+
+.led {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--led-off);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+    transition: background-color 0.1s, box-shadow 0.1s;
+}
+
+.led.led-white.on {
+    background-color: var(--led-white-on);
+    box-shadow: 0 0 15px var(--led-white-on);
+}
+
+.led.led-amber.on {
+    background-color: var(--led-amber-on);
+    box-shadow: 0 0 15px var(--led-amber-on);
+}
+
+.led.led-red.on {
+    background-color: var(--led-red-on);
+    box-shadow: 0 0 15px var(--led-red-on);
+}
+
+/* Control Panel */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: #e6f0fa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.switch-container:hover {
+    background: #d0e4fb;
+}
+
+.switch-label {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.status-badge {
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: #d0e4fb;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.status-badge.on {
+    background: var(--accent);
+    color: #ffffff;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    background-color: #e6f0fa;
+    color: var(--text-color);
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+/* System Status */
+.status-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.status-list li {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.clock-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--led-off);
+}
+.clock-indicator.tick {
+    background-color: var(--accent);
+}
+
+.explanation-box {
+    background: #e6f0fa;
+    padding: 15px;
+    border-left: 4px solid var(--accent);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+/* Timing Diagram */
+.timing-tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #f4f9ff;
+    padding: 15px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.track-label {
+    width: 60px;
+    font-size: 0.8em;
+    color: #0055cc;
+}
+
+.waveform {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    border-bottom: 1px dashed #cce0ff;
+    display: flex;
+    align-items: flex-end;
+}
+
+.wave-segment {
+    width: 20px; /* Fixed width per clock tick */
+    border-top: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+    box-sizing: border-box;
+}
+
+.wave-segment.low {
+    height: 2px;
+    border-top: none;
+    border-bottom: 2px solid var(--accent);
+}
+.wave-segment.high {
+    height: 100%;
+}
+
+/* Circuit Diagram */
+.circuit-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.circuit-block {
+    border: 2px solid var(--accent);
+    padding: 15px 30px;
+    text-align: center;
+    background: #e6f0fa;
+    border-radius: 5px;
+    min-width: 200px;
+}
+
+.arrow {
+    font-size: 24px;
+    color: var(--accent);
+    margin: 5px 0;
+}
+
+.arrow-right {
+    font-size: 24px;
+    color: var(--accent);
+    margin: 0 10px;
+}
+
+.clock-input {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    .clock-input {
+        position: static;
+        transform: none;
+        margin: 10px 0;
+    }
+    .arrow-right {
+        display: none;
+    }
+}
+
+.safety-content {
+    line-height: 1.6;
+}
+.safety-content ul {
+    padding-left: 20px;
+}
